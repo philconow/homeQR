@@ -1,0 +1,46 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>{% block title %}{% endblock %} | homeQR</title>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+            <link rel="stylesheet" href="{% static 'main.css' %}">
+    </head>
+    <body>
+        <nav class="navbar is-dark" id="navbarapp">
+			<div class="navbar-brand">
+				<a class="navbar-item" href="{% url 'frontpage' %}">homeQR</a>
+			</div>
+
+
+				<div class="navbar-end">					
+					<div class="navbar-item">
+						<a href="{% url 'qr_list' %}" class="button is-primary">QR</a>
+					</div>
+				</div>
+			</div>
+		</nav>
+
+        <section class="section">
+            {% block content %}
+            {% endblock %}
+        </section>
+        
+
+        <footer class="footer">
+            <div class="columns">
+                <div class="column is-4">
+                    <h2 class="subtitle">homeQR</h2>
+                </div>
+
+                <div class="column is-8">  
+                    <a href="{% url 'about' %}" class="navbar-item">About</a>
+                    <a href="{% url 'contact' %}" class="navbar-item">Contact</a>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>

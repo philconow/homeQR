@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2 class="subtitle">
+        <a href="{% url 'room_detail' container.location.room.slug %}">{{ container.location.room }}</a>   
+        /
+        <a href="{% url 'location_detail' container.location.room.slug container.location.slug %}">{{ container.location  }}</a> /
+        
+    </h2>
+    <h1 class="title">{{ container.name }}</h1>
+
+    <hr>
+    <img src="/{{ container.image }}">
+{% endblock %}

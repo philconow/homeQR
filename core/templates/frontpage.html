@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+<h1 class="title">{% block title %}The Front Page{% endblock %}</h1>
+
+{% block content %}
+    <div class="columns is-multiline">
+        {% for container in containers %}
+            <div class="column is-3">
+                <div class="card">
+                    <div class="card-image">
+                        <figure class="image">
+                            <img src="{{ container.thumbnail }}"> 
+                        </figure>
+                    </div>
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-content">
+                                <p class="title is-4">{{ container.name }}</p>
+                                <p class="subtitle is-6">Location: {{ container.location }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <footer class="card-footer">
+                        <a href="{% url 'container_detail' container.location.room.slug container.location.slug container.slug %}" class="card-footer-item">View</a>
+                    </footer>
+                </div>
+            </div>    
+        {% endfor %}
+    </div>
+{% endblock %}

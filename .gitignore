@@ -1,0 +1,10 @@
+*.pyc
+*.vscode/
+
+db.sqlite3
+media/
+homeQR/secretkey.py
+
+core/migrations/
+items/migrations/
+QR/migrations/
