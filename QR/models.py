@@ -33,9 +33,8 @@ class QRBlock(models.Model):
         v_img.paste(original_image, (0,0))
         v_img.paste(new_image, (0, original_image.height))
         return v_img
-
-    def new_qr(self):
-        
+    
+    def new_qr(self):        
         first_qr = QR.objects.create(qr_block=self)
         first_qr.create_qr(self)        
         path = f'./media/uploads/qr/{first_qr.id}.png'
