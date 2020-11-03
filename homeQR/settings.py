@@ -28,6 +28,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'frontpage'
+LOGOUT_REDIRECT_URL = 'frontpage' # TODO change this to myaccount or something
 
 # Application definition
 
@@ -41,11 +44,15 @@ INSTALLED_APPS = [
 
     # My Apps    
     'django_extensions',
-    'core',
-    'items',
-    'QR',
-    
+    'rest_framework',
     'django_cleanup.apps.CleanupConfig',
+
+    'core',    
+    'items',    
+    'QR',
+    'userprofile'
+    
+    
 ]
 
 MIDDLEWARE = [
@@ -134,4 +141,4 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static/'),
 ]
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_ROOT = os.path.join(BASE_DIR, '', 'media')

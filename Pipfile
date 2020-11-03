@@ -11,6 +11,9 @@ django-extensions = "*"
 image = "*"
 segno = "*"
 django-cleanup = "*"
+djangorestframework = "*"
+markdown = "*"
+django-filter = "*"
 
 [requires]
 python_version = "3.8"

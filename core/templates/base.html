@@ -3,33 +3,49 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <!-- Meta -->
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-            <title>{% block title %}{% endblock %} | homeQR</title>
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
-            <link rel="stylesheet" href="{% static 'main.css' %}">
+        
+        <!-- Title -->
+        <title>{% block title %}{% endblock %} | homeQR</title>
+        
+        <!-- Styles -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+        <link rel="stylesheet" href="{% static 'main.css' %}">
     </head>
     <body>
+        <!-- Navbar -->
         <nav class="navbar is-dark" id="navbarapp">
 			<div class="navbar-brand">
 				<a class="navbar-item" href="{% url 'frontpage' %}">homeQR</a>
 			</div>
-
-
+            <div class="navbar-menu">
 				<div class="navbar-end">					
 					<div class="navbar-item">
-						<a href="{% url 'qr_list' %}" class="button is-primary">QR</a>
+                        <div class="buttons">
+                            {% if request.user.is_authenticated %}
+                                <a href="{% url 'dashboard' %}" class="button is-light">{{ request.user.username }}</a>
+                                <a href="{% url 'logout' %}" class="button is-danger">LOG OUT</a>
+                            {% else %}
+                                <a href="{% url 'signup' %}" class="button is-success">SIGN UP</a>
+                                <a href="{% url 'login' %}" class="button is-light">LOGIN</a>
+                            {% endif %}
+                        </div>
 					</div>
 				</div>
 			</div>
 		</nav>
+        <!-- End Navbar -->
 
+        <!-- Main Content -->
         <section class="section">
             {% block content %}
             {% endblock %}
         </section>
-        
+        <!--End  Main Content -->
 
+        <!-- Footer -->
         <footer class="footer">
             <div class="columns">
                 <div class="column is-4">
@@ -39,8 +55,10 @@
                 <div class="column is-8">  
                     <a href="{% url 'about' %}" class="navbar-item">About</a>
                     <a href="{% url 'contact' %}" class="navbar-item">Contact</a>
+                    <a href="https://github.com/philconow/homeQR/" class="navbar-item">Github</a>
                 </div>
             </div>
         </footer>
+        <!-- End Footer -->
     </body>
 </html>

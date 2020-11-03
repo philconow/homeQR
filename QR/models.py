@@ -1,31 +1,26 @@
 from django.db import models
-from django.core.files import File
 from items.models import Container
+from django.contrib.auth.models import User
 
 from segno import make_qr
 from PIL import Image
 
+
 # Create your models here.
 
 class QRBlock(models.Model):
-    image = models.ImageField(upload_to='./media/uploads/qr/', blank=True, null=True)
+    image = models.ImageField(upload_to='./../media/uploads/qr', blank=True, null=True)
     qr_count_horizontal = models.IntegerField(default=5)
     qr_count_vertical = models.IntegerField(default=8) 
-    start_block = models.IntegerField(blank=True, null=True)
-    end_block = models.IntegerField(blank=True, null=True)
+    scale = models.IntegerField(default=15)
+    
+    created_by = models.ForeignKey(User, related_name='qrblocks', on_delete=models.DO_NOTHING, null=True)
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
+    change_at = models.DateTimeField(auto_now=True, null=True)
 
-
-    # def get_qr_index():
-    #     return QR.objects.latest('id') + 1
-    def save(self, *args, **kwargs):
+    def save(self, *args, **kwargs): 
         super(QRBlock, self).save(*args, **kwargs)
         qr_block = self.create_block()
-        qr_directory = f'./media/uploads/qr/'
-        block_full_path = f'{qr_directory}qrblock_{self.id}.png'        
-        qr_block.save(block_full_path)
-        saved_img = open(block_full_path, 'rb')
-        self.image.save(block_full_path, File(saved_img), save=False)        
-        super(QRBlock, self).save(*args, **kwargs)
  
     def concat_horizontal_image(self, original_image, new_image):
         h_img = Image.new('RGB', ((original_image.width + new_image.width), original_image.height))
@@ -40,12 +35,11 @@ class QRBlock(models.Model):
         return v_img
 
     def new_qr(self):
-        first_qr = QR()
-        first_qr.save()
+        
+        first_qr = QR.objects.create(qr_block=self)
         first_qr.create_qr(self)        
         path = f'./media/uploads/qr/{first_qr.id}.png'
-        return Image.open(path)
-         
+        return Image.open(path)         
 
     def create_horizontal_block(self):
         # Create first QR code and open
@@ -67,17 +61,19 @@ class QRBlock(models.Model):
 
 
 class QR(models.Model):
-    image = models.ImageField(upload_to='./media/uploads/qr/', blank=True, null=True)
+    image = models.ImageField(upload_to='./../media/uploads/qr', blank=True, null=True)
     container = models.ForeignKey(Container, related_name='containers', on_delete=models.DO_NOTHING, blank=True, null=True)
     qr_block = models.ForeignKey(QRBlock, related_name='qrblocks', on_delete=models.CASCADE, blank=True, null=True)
-    scale = models.IntegerField(default=15)
     
+    created_by = models.ForeignKey(User, related_name='qr', on_delete=models.DO_NOTHING, null=True)
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
+    change_at = models.DateTimeField(auto_now=True, null=True)
+
     def create_qr(self, QRBlock):
         qr_code = make_qr(self.id)
-        path = f'./media/uploads/qr/{self.id}.png'
-        qr_code.save(path, scale=self.scale)        
-        saved_img = open(path, 'rb')
-        self.image.save(f'./media/uploads/qr/{self.id}.png', File(saved_img), save=False)
-        self.qr_block.save(QRBlock)
+        segno_path = f'./media/uploads/qr/{self.id}.png'
+        qr_code.save(segno_path, scale=self.qr_block.scale)  
+        self.image = f'./../media/uploads/qr/{self.id}.png'
+        self.save()
         return qr_code
 
