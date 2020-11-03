@@ -16,7 +16,7 @@ def add_qr_block(request):
             qr_block.created_by = request.user
             qr_block.save()
 
-            return redirect('dashboard')
+            return redirect('qr_list.html')
     else:
         form = AddQRBlockForm()
     

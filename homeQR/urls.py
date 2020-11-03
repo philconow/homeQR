@@ -37,7 +37,7 @@ urlpatterns = [
     path('signup/', signup, name='signup'),
     path('dashboard/', dashboard, name='dashboard'),
 
-    #path('qr/', qr_list, name='qr_list'),
+    path('qr/', qr_list, name='qr_list'),
     path('qr/add/', add_qr_block, name='add_qr_block'),
 
     path('<slug:slug>/', room_detail, name='room_detail'), 

@@ -1,6 +1,8 @@
-from django.db import models
-from items.models import Container
 from django.contrib.auth.models import User
+from django.db import models
+from django.core.files import File
+
+from items.models import Container
 
 from segno import make_qr
 from PIL import Image
@@ -38,13 +40,13 @@ class QRBlock(models.Model):
         first_qr = QR.objects.create(qr_block=self)
         first_qr.create_qr(self)        
         path = f'./media/uploads/qr/{first_qr.id}.png'
-        return Image.open(path)         
+        return Image.open(path)        
 
     def create_horizontal_block(self):
         # Create first QR code and open
         original_qr_img = self.new_qr()            
         # Create next n QR images and concat to last group of images going horizontally
-        for x in range(self.qr_count_horizontal):
+        for x in range(self.qr_count_horizontal-1):
             new_qr_img = self.new_qr()
             original_qr_img = self.concat_horizontal_image(original_image=original_qr_img, new_image=new_qr_img)
         #print('width:', original_qr_img.width)
@@ -52,10 +54,16 @@ class QRBlock(models.Model):
 
     def create_block(self):        
         original_qr_block = self.create_horizontal_block()
-        for y in range(self.qr_count_vertical):
+        for y in range(self.qr_count_vertical-1):
             new_horizontal_block = self.create_horizontal_block()
             original_qr_block = self.concat_vertical_image(original_image=original_qr_block, new_image = new_horizontal_block)
-        return original_qr_block
+        
+        path = f'./media/uploads/qr/qrblock_{self.id}.png'
+        original_qr_block.save(path)
+        self.image = f'./../media/uploads/qr/qrblock_{self.id}.png'
+        super(QRBlock, self).save()
+
+
 
 
 
