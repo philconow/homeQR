@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class=title>View QRBlock {{ qrblock.id }}</h1> 
+    
+    <small>Date added: {{ qrblock.created_at }}</small>
+    
+    <img href="/{{ qrblock.image }}">    
+
+    <a class="button is-success">Print</a>
+{% endblock %}

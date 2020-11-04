@@ -1,14 +1,10 @@
 from django.contrib.auth.models import User
 from django.db import models
-from django.core.files import File
 
 from items.models import Container
 
 from segno import make_qr
 from PIL import Image
-
-
-# Create your models here.
 
 class QRBlock(models.Model):
     image = models.ImageField(upload_to='./../media/uploads/qr', blank=True, null=True)
@@ -62,10 +58,6 @@ class QRBlock(models.Model):
         original_qr_block.save(path)
         self.image = f'./../media/uploads/qr/qrblock_{self.id}.png'
         super(QRBlock, self).save()
-
-
-
-
 
 class QR(models.Model):
     image = models.ImageField(upload_to='./../media/uploads/qr', blank=True, null=True)

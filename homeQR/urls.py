@@ -23,8 +23,9 @@ from django.contrib.auth import views
 
 from core.views import frontpage, about, contact, signup
 from items.views import container_detail, location_detail, room_detail
-from userprofile.views import dashboard
-from QR.views import qr_list, add_qr_block
+from userprofile.views import dashboard, view_qrblock
+from QR.views import add_qr_block
+
 
 urlpatterns = [
     path('', frontpage, name='frontpage'),  
@@ -37,9 +38,9 @@ urlpatterns = [
     path('signup/', signup, name='signup'),
     path('dashboard/', dashboard, name='dashboard'),
 
-    path('qr/', qr_list, name='qr_list'),
-    path('qr/add/', add_qr_block, name='add_qr_block'),
-
+    path('qr/add/', add_qr_block, name='add_qr_block'),    
+    path('qr/view/<int:qrblock_id>/', view_qrblock, name='view_qrblock'),
+    
     path('<slug:slug>/', room_detail, name='room_detail'), 
     path('<slug:room_slug>/<slug:slug>/', location_detail, name='location_detail'),  
     path('<slug:room_slug>/<slug:location_slug>/<slug:slug>/', container_detail, name='container_detail'),    
