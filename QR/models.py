@@ -8,7 +8,7 @@ from PIL import Image
 
 class QRBlock(models.Model):
     image = models.ImageField(upload_to='./../media/uploads/qr', blank=True, null=True)
-    qr_count_horizontal = models.IntegerField(default=5)
+    qr_count_horizontal = models.IntegerField(default=6)
     qr_count_vertical = models.IntegerField(default=8) 
     scale = models.IntegerField(default=15)
     
