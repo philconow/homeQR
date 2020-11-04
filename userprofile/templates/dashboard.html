@@ -8,7 +8,7 @@
     <h2>QR Blocks</h2>
     {% for qrblock in request.user.qrblocks.all %}
         <div class="qrblock">
-            
+            <a href="{% url 'view_qrblock' qrblock.id %}">block - {{ qrblock.id }}</a>
         </div>
     {% empty %}
         <p>You haven't created any QRs yet</p>

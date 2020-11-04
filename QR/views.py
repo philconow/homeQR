@@ -21,4 +21,4 @@ def add_qr_block(request):
     else:
         form = AddQRBlockForm()
     
-    return render(request, 'add_QRBlock.html', {'form': form})
+    return render(request, 'add_qr_block.html', {'form': form})

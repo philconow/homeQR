@@ -1,11 +1,17 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 
+from userprofile.models import User
 from QR.models import QRBlock
 
 @login_required
 def dashboard(request):
-    return render(request, 'dashboard.html', {'userprofile': request.user.userprofile})
+    qrblocks = request.user.qrblocks.all()
+    context = {
+        'userprofile': request.user.userprofile,
+        'qrblocks': qrblocks
+    }
+    return render(request, 'dashboard.html', context)
 
 @login_required
 def view_qrblock(request, qrblock_id):
