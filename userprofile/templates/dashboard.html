@@ -7,7 +7,7 @@
    
     <h2>QR Blocks</h2>
 
-    {% for qrblock in request.user.qrblocks.all %}
+    {% for qrblock in request.user.qrblocks.all reversed %}
         <div class="qrblock">
             <a href="{% url 'view_qrblock' qrblock.id %}">block - {{ qrblock.id }}</a>
         </div>
