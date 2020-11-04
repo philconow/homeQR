@@ -38,8 +38,8 @@ urlpatterns = [
     path('signup/', signup, name='signup'),
     path('dashboard/', dashboard, name='dashboard'),
 
-    path('qr/add/', add_qr_block, name='add_qr_block'),    
-    path('qr/view/<int:qrblock_id>/', view_qrblock, name='view_qrblock'),
+    path('qr/block/add/', add_qr_block, name='add_qr_block'),    
+    path('qr/block/view/<int:qrblock_id>/', view_qrblock, name='view_qrblock'),
     
     path('<slug:slug>/', room_detail, name='room_detail'), 
     path('<slug:room_slug>/<slug:slug>/', location_detail, name='location_detail'),  
