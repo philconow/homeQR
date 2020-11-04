@@ -11,7 +11,7 @@
     <!-- TODO: Add if statement for admin view all -->
     {% for qrblock in request.user.qrblocks.all reversed %}
         <div class="qrblock">
-            <a href="{% url 'view_qrblock' qrblock.id %}">{{ qrblock.id }}</a>
+            <a href="{% url 'view_qr_block' qrblock.id %}">{{ qrblock.id }}</a>
         </div>
     {% empty %}
         <p>You haven't created any QRs yet</p>

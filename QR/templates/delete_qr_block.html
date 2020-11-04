@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="title">Delete QRBlock {{ qrblock.id }}</h1> 
+    
+
+
+    <h2>Are you sure you want to delete?</h2>
+    
+    <br>
+
+    <!-- Delete Button -->
+    <form method="post" action="{% url 'delete_qr_block' qrblock.id %}">
+        {% csrf_token %}        
+
+        <div class="field">
+            <div class="control">
+                <button class="button is-danger">Delete</button>
+            </div>
+        </div>
+    </form>
+
+    <br>
+
+    <!-- Cancel Button -->
+    <a href="{% url 'view_qr_block' qrblock.id %}" class="button is-light">Cancel</a>
+
+{% endblock %}

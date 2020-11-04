@@ -68,7 +68,7 @@ class QR(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     change_at = models.DateTimeField(auto_now=True, null=True)
 
-    def create_qr(self):
+    def create_qr(self, QRBlock):
         qr_code = make_qr(self.id)
         segno_path = f'./media/uploads/qr/{self.id}.png'
         qr_code.save(segno_path, scale=self.qr_block.scale)  

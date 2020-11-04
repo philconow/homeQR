@@ -17,7 +17,7 @@
                             <div class="media-content">
                                 <p class="title is-4">{{ container.name }}</p>
                                 <p class="subtitle is-6">{{ container.location }}</p>
-                                <p class="subtitle is-6">{{ container.created_at }}</p>
+                                <p class="subtitle is-6">Created: {{ container.created_at|date:"SHORT_DATE_FORMAT" }}</p>
                             </div>
                         </div>
                     </div>
