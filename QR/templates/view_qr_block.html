@@ -12,7 +12,7 @@
         <h1 class=title>QR List</h1>
 
         {% for qr in qrs %}
-            <a href="{% url 'view_qr_code' qr.id%}">{{ qr.id }}</a>
+            <a href="{% url 'view_qr_code' qr.id %}">{{ qr.id }}</a>
             
             {% if qr.container is None %} 
                 - Not Used
