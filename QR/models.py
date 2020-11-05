@@ -72,6 +72,7 @@ class QR(models.Model):
         qr_code = make_qr(self.id)
         segno_path = f'./media/uploads/qr/{self.id}.png'
         qr_code.save(segno_path, scale=self.qr_block.scale)  
+        self.created_by = QRBlock.created_by
         self.image = f'./../media/uploads/qr/{self.id}.png'
         self.save()
         return qr_code
