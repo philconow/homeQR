@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class='title'>Rooms</h1>
+   
+    <div class="columns is-multiline">
+        {% for room in rooms %}
+            <div class="column is-2">
+                <div class="card">
+                    <!-- TODO: Add Images to Rooms -->
+                    <div class="card-image">
+                        <figure class="image">
+                            <img src=""> 
+                        </figure>
+                    </div>
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-content">
+                                <p class="title is-4">{{ room.name }}</p>                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <footer class="card-footer">
+                        <a href="{% url 'room_detail' room.slug %}" class="card-footer-item">View</a>
+                    </footer>
+                </div>
+            </div>    
+        {% endfor %}
+    </div>
+{% endblock %}
