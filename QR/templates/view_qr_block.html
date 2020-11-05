@@ -2,7 +2,7 @@
 
 {% block content %}
     <h1 class=title>View QRBlock {{ qrblock.id }}</h1> 
-    <h2 class=subtitle>(QR Codes {{ qrblock.qrblocks.all.first.id }} - {{ qrblock.qrblocks.all.last.id }})</h2>
+    <h2 class=subtitle>(QR Codes {{ qrblock.qrs.all.first.id }} - {{ qrblock.qrs.all.last.id }})</h2>
     
     <small>Created by: {{ qrblock.created_by}}</small>
     <br>
@@ -11,11 +11,26 @@
     <br>
 
     <a class="button is-success">Print - TODO make print work</a>  
-    <a href="{% url 'delete_qr_block' qrblock.id %}" class="button is-danger">Delete - TODO make delete work</a>
+    <a href="{% url 'delete_qr_block' qrblock.id %}" class="button is-danger">Delete</a>
 
     <br>    
 
     <img src="/{{ qrblock.image }}">    
     
+    
+    <!-- List of QR Codes -->
+    <h1 class=title>QR List</h1>
+    {% for qr in qrs %}
+        <a href="{% url 'view_qr_code' qr.id%}">{{ qr.id }}</a>
+        
+        {% if qr.container is None %} 
+            - Not Used
+        {% else %}
+            - attached to <a href="{% url 'container_detail' qr.container.location.room.slug qr.container.location.slug qr.container.slug %}">{{ qr.container.name }}</a>
+        {% endif %}
+        
+        <br>
+    {% endfor %}
+    <!-- End of List of QR Codes -->
     
 {% endblock %}

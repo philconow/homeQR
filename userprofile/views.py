@@ -13,3 +13,4 @@ def dashboard(request):
         'qrblocks': qrblocks
     }
     return render(request, 'dashboard.html', context)
+    
