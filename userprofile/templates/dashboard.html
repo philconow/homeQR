@@ -13,10 +13,9 @@
     
     <div id="qrblock_list_div" style="display: none">
         <br>
-        <h1 class=title>QR Blocks:</h1>    
+        <h1 class=title>QR Blocks:</h1>   
 
         {% if request.user.is_superuser %}
-
             {% for qrblock in qrblocks reversed %}
                 <div class="qrblock">
                     <a href="{% url 'view_qr_block' qrblock.id %}">{{ qrblock.id }}</a>
@@ -24,17 +23,14 @@
             {% empty %}
                 <p>You haven't created any QRs yet</p>
             {% endfor %}
-
         {% else %}
-
             {% for qrblock in request.user.qrblocks.all reversed %}
                 <div class="qrblock">
                     <a href="{% url 'view_qr_block' qrblock.id %}">{{ qrblock.id }}</a>
                 </div>
             {% empty %}
                 <p>You haven't created any QRs yet</p>
-            {% endfor %}
-        
+            {% endfor %}        
         {% endif %}
     </div>
 
