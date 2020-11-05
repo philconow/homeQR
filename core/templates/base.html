@@ -19,6 +19,9 @@
         <nav class="navbar is-light" id="navbarapp">
 			<div class="navbar-brand">
 				<a class="navbar-item" href="{% url 'frontpage' %}">homeQR</a>
+            </div>
+            <div class="navbar-brand">
+				<a class="navbar-item" href="{% url 'room_list' %}">Rooms</a>
 			</div>
             <div class="navbar-menu">
 				<div class="navbar-end">					
@@ -43,7 +46,7 @@
             {% block content %}
             {% endblock %}
         </section>
-        <!--End  Main Content -->
+        <!--End Main Content -->
 
         <!-- Footer -->
         <footer class="footer">
