@@ -5,15 +5,28 @@
 
     <a href="{% url 'add_qr_block' %}" class="button is-light">Create New QRBlock</a>
 
+    <h2>QR Blocks:</h2>    
 
-    <h2>QR Blocks:</h2>
+    {% if request.user.is_superuser %}
+
+        {% for qrblock in qrblocks reversed %}
+            <div class="qrblock">
+                <a href="{% url 'view_qr_block' qrblock.id %}">{{ qrblock.id }}</a>
+            </div>
+        {% empty %}
+            <p>You haven't created any QRs yet</p>
+        {% endfor %}
+
+    {% else %}
+
+        {% for qrblock in request.user.qrblocks.all reversed %}
+            <div class="qrblock">
+                <a href="{% url 'view_qr_block' qrblock.id %}">{{ qrblock.id }}</a>
+            </div>
+        {% empty %}
+            <p>You haven't created any QRs yet</p>
+        {% endfor %}
     
-    <!-- TODO: Add if statement for admin view all -->
-    {% for qrblock in request.user.qrblocks.all reversed %}
-        <div class="qrblock">
-            <a href="{% url 'view_qr_block' qrblock.id %}">{{ qrblock.id }}</a>
-        </div>
-    {% empty %}
-        <p>You haven't created any QRs yet</p>
-    {% endfor %}
+    {% endif %}
+    
 {% endblock %}

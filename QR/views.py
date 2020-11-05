@@ -19,13 +19,19 @@ def add_qr_block(request):
 
 @login_required
 def view_qr_block(request, qrblock_id):
-    qrblock = get_object_or_404(QRBlock, pk=qrblock_id, created_by=request.user)
+    if request.user.is_superuser:
+        qrblock = get_object_or_404(QRBlock, pk=qrblock_id)
+    else:
+        qrblock = get_object_or_404(QRBlock, pk=qrblock_id, created_by=request.user)
     return render(request, 'view_qr_block.html', {'qrblock': qrblock})
 
 @login_required
 def delete_qr_block(request, qrblock_id):
     # TODO if statement admin view all
-    qrblock = get_object_or_404(QRBlock, pk=qrblock_id, created_by=request.user)
+    if request.user.is_superuser:
+        qrblock = get_object_or_404(QRBlock, pk=qrblock_id)
+    else:
+        qrblock = get_object_or_404(QRBlock, pk=qrblock_id, created_by=request.user)
     if request.method == 'POST':
         qrblock.delete()
         return redirect('dashboard')         
@@ -33,6 +39,9 @@ def delete_qr_block(request, qrblock_id):
 
 @login_required
 def view_qr_code(request, qr_id):
-    # TODO if statement admin view all 
-    qr = get_object_or_404(QR, pk=qr_id)
+    # TODO if statement admin view all
+    if request.user.is_superuser: 
+        qr = get_object_or_404(QR, pk=qr_id)
+    else:
+        qr = get_object_or_404(QR, pk=qr_id, created_by=request.user)
     return render(request, 'view_qr_code.html', {'qr': qr})
