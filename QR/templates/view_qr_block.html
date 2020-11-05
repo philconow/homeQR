@@ -3,7 +3,10 @@
 {% block content %}
     <h1 class=title>View QRBlock {{ qrblock.id }}</h1> 
     <h2 class=subtitle>(QR Codes {{ qrblock.qrblocks.all.first.id }} - {{ qrblock.qrblocks.all.last.id }})</h2>
-    <small>Date added: {{ qrblock.created_at }}</small>
+    
+    <small>Created by: {{ qrblock.created_by}}</small>
+    <br>
+    <small>Date added: {{ qrblock.created_at }}</small>    
     
     <br>
 
