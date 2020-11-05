@@ -62,7 +62,7 @@ class QRBlock(models.Model):
 class QR(models.Model):
     image = models.ImageField(upload_to='./../media/uploads/qr', blank=True, null=True)
     container = models.ForeignKey(Container, related_name='containers', on_delete=models.DO_NOTHING, blank=True, null=True)
-    qr_block = models.ForeignKey(QRBlock, related_name='qrblocks', on_delete=models.CASCADE, blank=True, null=True)
+    qr_block = models.ForeignKey(QRBlock, related_name='qrs', on_delete=models.CASCADE, blank=True, null=True)
     
     created_by = models.ForeignKey(User, related_name='qr', on_delete=models.DO_NOTHING, null=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
