@@ -1,5 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <script src="https://unpkg.com/vue-qrcode-reader/dist/VueQrcodeReader.umd.min.js"></script>    
+<div id="app">
+    <p>
+      Last result: <b>{{ decodedContent }}</b>
+    </p>
+  
+    <p class="error">
+      {{ errorMessage }}
+    </p>
+  
+    <qrcode-stream @decode="onDecode" @init="onInit"></qrcode-stream>
+</div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="{{ STATIC_URL }}/static/scan.js"></script>    
 {% endblock %}

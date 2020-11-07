@@ -48,3 +48,9 @@ def view_qr_code(request, qr_id):
     else:
         qr = get_object_or_404(QR, pk=qr_id, created_by=request.user)
     return render(request, 'view_qr_code.html', {'qr': qr})
+
+# TODO: Fix this view
+def scan_qr_code(request):
+    return render(request, 'scan_qr_code.html')
+
+
