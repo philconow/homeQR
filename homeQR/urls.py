@@ -22,8 +22,8 @@ from django.conf.urls.static import static
 from django.contrib.auth import views
 
 from core.views import frontpage, about, contact, signup
-from items.views import container_detail, location_detail, room_detail, room_list
-from QR.views import add_qr_block, view_qr_block, delete_qr_block, view_qr_code
+from items.views import add_container, add_location, container_detail, location_detail, room_detail, room_list, add_room, add_location, add_container, add_item
+from QR.views import add_qr_block, view_qr_block, delete_qr_block, view_qr_code, scan_qr_code
 from userprofile.views import dashboard
 
 urlpatterns = [
@@ -41,8 +41,13 @@ urlpatterns = [
     path('qr/block/view/<int:qrblock_id>/', view_qr_block, name='view_qr_block'),
     path('qr/block/delete/<int:qrblock_id>/', delete_qr_block, name='delete_qr_block'),
     path('qr/code/view/<int:qr_id>/', view_qr_code, name='view_qr_code'),
+    path('qr/scan/', scan_qr_code, name='scan_qr_code'),
     
     path('rooms/', room_list, name='room_list'),
+    path('rooms/add/', add_room, name='add_room'),
+    path('locations/add/', add_location, name='add_location'),
+    path('containers/add/', add_container, name='add_container'),
+    path('items/add/', add_item, name='add_item'),
     path('<slug:slug>/', room_detail, name='room_detail'), 
     path('<slug:room_slug>/<slug:slug>/', location_detail, name='location_detail'),  
     path('<slug:room_slug>/<slug:location_slug>/<slug:slug>/', container_detail, name='container_detail'),    
