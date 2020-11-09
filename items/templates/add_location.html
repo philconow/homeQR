@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1 class="title">Add Location</h1> 
+    <h1 class="title">Add Location in {{ location.room.name }}</h1> 
 
     <form method="post" action=".">
         {% csrf_token %}
