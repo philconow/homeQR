@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2 class="subtitle">
+        <a href="{% url 'room_detail' item.container.location.room.slug %}">{{ item.container.location.room }}</a> /
+        <a href="{% url 'location_detail' item.container.location.room.slug item.container.location.slug %}">{{ item.container.location }}</a> /
+        <a href="{% url 'container_detail' item.container.location.room.slug item.container.location.slug item.container.slug %}">{{ item.container }}</a> /
+    </h2>
+    <h1 class="title">{{ item.name }}</h1>
+
+    <a href="{% url 'delete_item' item.container.location.room.slug item.container.location.slug item.container.slug item.slug %}" class="button is-danger">Delete Item</a>
+
+    <br></br>
+    {% if item.image %}
+        <img src="{{ MEDIA_URL }}/{{ item.image }}">
+    {% endif %}
+{% endblock %}
