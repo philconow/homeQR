@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="title">Deleting {{ item.name }}</h1> 
+        
+
+
+    <h2>Are you sure you want to delete?</h2>
+
+    <br>
+
+    <!-- Delete Button -->
+    <form method="post" action="{% url 'delete_item' item.container.location.room.slug item.container.location.slug item.container.slug item.slug %}">
+        {% csrf_token %}        
+
+        <div class="field">
+            <div class="control">
+                <button class="button is-danger">Delete</button>
+            </div>
+        </div>
+    </form>
+
+    <br>
+
+    <!-- Cancel Button -->
+    <a href="{% url 'delete_item' item.container.location.room.slug item.container.location.slug item.container.slug item.slug %}" class="button is-light">Cancel</a>
+{% endblock %}
