@@ -9,7 +9,9 @@
                 <div class="card">
                     <div class="card-image">
                         <figure class="image">
-                            <img src="{{ container.thumbnail }}"> 
+                            {% if container.image %}
+                                <img src="{{ MEDIA_URL }}/{{ container.image }}">                                
+                            {% endif %}
                         </figure>
                     </div>
                     <div class="card-content">

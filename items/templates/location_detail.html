@@ -6,14 +6,20 @@
     </h2>
     <h1 class='title'>{{ location.name }}</h1>
 
-   
+    <a href="{% url 'add_container' location.room.slug location.slug %}" class="button is-success">Add Container</a>
+    <a href="{% url 'delete_location' location.room.slug location.slug %}" class="button is-danger">Delete Location</a>
+    
+    <br></br>
+
     <div class="columns is-multiline">
         {% for container in containers %}
             <div class="column is-2">
                 <div class="card">
                     <div class="card-image">
                         <figure class="image">
-                            <img src="/{{ container.thumbnail }}"> 
+                            {% if container.image %}
+                                <img src="{{ MEDIA_URL }}/{{ container.image }}">
+                            {% endif %}
                         </figure>
                     </div>
                     <div class="card-content">
