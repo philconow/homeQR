@@ -10,4 +10,5 @@ TODO LIST
 - Add qrcode scan
 - Add settings and admin settings
 - Dropdown in qr code view to select container
+- Change how slugs are handled
 
