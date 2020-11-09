@@ -21,8 +21,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views
 
+from items.views import room_list, room_detail, location_detail, container_detail, item_detail 
+from items.views import add_room, add_location, add_container, add_item
+from items.views import delete_room, delete_location, delete_container, delete_item
+
 from core.views import frontpage, about, contact, signup
-from items.views import add_container, add_location, container_detail, location_detail, room_detail, room_list, add_room, add_location, add_container, add_item
 from QR.views import add_qr_block, view_qr_block, delete_qr_block, view_qr_code, scan_qr_code
 from userprofile.views import dashboard
 
@@ -44,13 +47,19 @@ urlpatterns = [
     path('qr/scan/', scan_qr_code, name='scan_qr_code'),
     
     path('rooms/', room_list, name='room_list'),
-    path('rooms/add/', add_room, name='add_room'),
-    path('locations/add/', add_location, name='add_location'),
-    path('containers/add/', add_container, name='add_container'),
-    path('items/add/', add_item, name='add_item'),
-    path('<slug:slug>/', room_detail, name='room_detail'), 
+    path('rooms/add-room/', add_room, name='add_room'),
+    path('<slug:slug>/add-location/', add_location, name='add_location'),
+    path('<slug:room_slug>/<slug:slug>/add-container/', add_container, name='add_container'),
+    path('<slug:room_slug>/<slug:location_slug>/<slug:slug>/add-items/', add_item, name='add_item'),    
+    
+    path('<slug:slug>/delete/', delete_room, name='delete_room'), 
+    path('<slug:room_slug>/<slug:slug>/delete/', delete_location, name='delete_location'), 
+    path('<slug:room_slug>/<slug:location_slug>/<slug:slug>/delete/', delete_container, name='delete_container'),
+    path('<slug:room_slug>/<slug:location_slug>/<slug:container_slug>/<slug:slug>/delete/', delete_item, name='delete_item'),
+
+    path('<slug:slug>/', room_detail, name='room_detail'),     
     path('<slug:room_slug>/<slug:slug>/', location_detail, name='location_detail'),  
     path('<slug:room_slug>/<slug:location_slug>/<slug:slug>/', container_detail, name='container_detail'),    
-
+    path('<slug:room_slug>/<slug:location_slug>/<slug:container_slug>/<slug:slug>/', item_detail, name='item_detail'),   
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
