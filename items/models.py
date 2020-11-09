@@ -66,19 +66,8 @@ class Container(models.Model):
         return self.name
     
     def save(self, *args, **kwargs):
-    #    self.thumbnail = self.make_thumbnail(self.image)
         self.slug = slugify(self.name)
         super(Container, self).save(*args, **kwargs)
-
-    # def make_thumbnail(self, image, size=(300,200)):
-    #     img = Image.open(image)
-    #     img.convert('RGB')
-    #     img.thumbnail(size)
-
-    #     thumb_io = BytesIO()
-    #     img.save(thumb_io, 'JPEG', quality=100)
-    #     thumbnail = File(thumb_io, name=image.name)
-    #     return thumbnail
 
 class Item(models.Model):
     name        = CharField(max_length=250)
@@ -86,7 +75,7 @@ class Item(models.Model):
     container   = models.ForeignKey(Container, related_name='items', on_delete=models.CASCADE)
     created_at  = DateTimeField(auto_now_add=True)
     
-    image       = models.ImageField(upload_to='./../media/uploads/containers', blank=True, null=True)
+    image       = models.ImageField(upload_to='./../media/uploads/items', blank=True, null=True)
     
     created_by  = models.ForeignKey(User, related_name='items', on_delete=models.SET_NULL, null=True)
     created_at  = models.DateTimeField(auto_now_add=True, null=True)
