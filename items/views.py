@@ -73,7 +73,7 @@ def add_location(request, slug):
 def add_container(request, room_slug, slug):
     location = get_object_or_404(Location, slug=slug)
     if request.method == 'POST':        
-        form = AddContainerForm(request.POST)
+        form = AddContainerForm(request.POST, files=request.FILES)
         if form.is_valid():
             container = form.save(commit=False)
             container.created_by = request.user
@@ -89,7 +89,7 @@ def add_container(request, room_slug, slug):
 def add_item(request, room_slug, location_slug, slug):
     container = get_object_or_404(Container, slug=slug)
     if request.method == 'POST':
-        form = AddItemForm(request.POST)
+        form = AddItemForm(request.POST, files=request.FILES)
         if form.is_valid():
             item = form.save(commit=False)
             item.created_by = request.user

@@ -3,7 +3,7 @@
 {% block content %}
     <h1 class="title">Add Item in {{ container.name }}</h1> 
 
-    <form method="post" action=".">
+    <form method="post" action="." enctype="multipart/form-data">
         {% csrf_token %}
     
         {{ form.as_p }}
