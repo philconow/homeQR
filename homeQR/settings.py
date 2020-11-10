@@ -47,10 +47,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_cleanup.apps.CleanupConfig',
 
-    'core',    
-    'items',    
-    'QR',
-    'userprofile'
+    'core.apps.CoreConfig',    
+    'items.apps.ItemsConfig',    
+    'QR.apps.QrConfig',
+    'userprofile.apps.UserprofileConfig',
     
     
 ]
