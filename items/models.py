@@ -1,13 +1,7 @@
 from django.db import models
 from django.db.models.fields import BooleanField, CharField, DateTimeField, SlugField, TextField
-from django.core.files import File
 from django.utils.text import slugify
 from django.contrib.auth.models import User
-from django.conf import settings
-from io import BytesIO
-from PIL import Image
-
-
 
 class Room(models.Model):
     name = CharField(max_length=250)
