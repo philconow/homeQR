@@ -1,7 +1,10 @@
-{% extends 'base.html' %}
+{% extends 'core/base.html' %}
 
 {% block content %}
-    <h1 class="title">Add Location in {{ location.room.name }}</h1> 
+    <h1 class="title">Create QRBlock</h1> 
+    
+    <p>Note: Recommend not to change values</p> 
+    <p>Default 6 x 8 QRs fit letter pages with 15 scale</p>    
 
     <form method="post" action=".">
         {% csrf_token %}

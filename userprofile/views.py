@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from QR.models import QRBlock
 
 @login_required
-def dashboard(request):
+def view_dashboard(request):
     if request.user.is_superuser:
         qrblocks = QRBlock.objects.all()
     else:
@@ -12,5 +12,5 @@ def dashboard(request):
         'userprofile': request.user.userprofile,
         'qrblocks': qrblocks
     }
-    return render(request, 'dashboard.html', context)
+    return render(request, 'userprofile/dashboard.html', context)
     

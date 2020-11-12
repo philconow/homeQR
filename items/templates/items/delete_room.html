@@ -1,14 +1,14 @@
-{% extends 'base.html' %}
+{% extends 'core/base.html' %}
 
 {% block content %}
-    <h1 class="title">Deleting {{ location.name }}</h1> 
+    <h1 class="title">Deleting {{ room.name }}</h1> 
 
     <h2>Are you sure you want to delete?</h2>
 
     <br>
 
     <!-- Delete Button -->
-    <form method="post" action="{% url 'delete_location' location.room.slug location.slug %}">
+    <form method="post" action="{% url 'delete_room' room.slug %}">
         {% csrf_token %}        
 
         <div class="field">
@@ -21,5 +21,5 @@
     <br>
 
     <!-- Cancel Button -->
-    <a href="{% url 'delete_location' location.room.slug location.slug %}" class="button is-light">Cancel</a>
+    <a href="{% url 'room_detail' room.slug %}" class="button is-light">Cancel</a>
 {% endblock %}

@@ -15,7 +15,7 @@ def add_qr_block(request):
             return redirect('dashboard')
     else:
         form = AddQRBlockForm()    
-    return render(request, 'add_qr_block.html', {'form': form})
+    return render(request, 'QR/add_qr_block.html', {'form': form})
 
 @login_required
 def view_qr_block(request, qrblock_id):
@@ -28,7 +28,7 @@ def view_qr_block(request, qrblock_id):
         'qrblock': qrblock,
         'qrs': qrs
     }
-    return render(request, 'view_qr_block.html', context)
+    return render(request, 'QR/view_qr_block.html', context)
 
 @login_required
 def delete_qr_block(request, qrblock_id):
@@ -39,7 +39,7 @@ def delete_qr_block(request, qrblock_id):
     if request.method == 'POST':
         qrblock.delete()
         return redirect('dashboard')         
-    return render(request, 'delete_qr_block.html', {'qrblock': qrblock})
+    return render(request, 'QR/delete_qr_block.html', {'qrblock': qrblock})
 
 @login_required
 def view_qr_code(request, qr_id):
@@ -47,10 +47,10 @@ def view_qr_code(request, qr_id):
         qr = get_object_or_404(QR, pk=qr_id)
     else:
         qr = get_object_or_404(QR, pk=qr_id, created_by=request.user)
-    return render(request, 'view_qr_code.html', {'qr': qr})
+    return render(request, 'QR/view_qr_code.html', {'qr': qr})
 
 # TODO: Fix this view
 def scan_qr_code(request):
-    return render(request, 'scan_qr_code.html')
+    return render(request, 'QR/scan_qr_code.html')
 
 

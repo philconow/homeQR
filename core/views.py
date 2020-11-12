@@ -5,13 +5,13 @@ from items.models import Container
 
 def frontpage(request):
     containers = Container.objects.all()
-    return render(request, 'frontpage.html', {'containers': containers})
+    return render(request, 'core/frontpage.html', {'containers': containers})
 
 def about(request):
-    return render(request, 'about.html')
+    return render(request, 'core/about.html')
 
 def contact(request):
-    return render(request, 'contact.html')
+    return render(request, 'core/contact.html')
 
 def signup(request):
     if request.method == 'POST':
@@ -19,7 +19,7 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             login(request, user) # Logs in and authenticates user
-            return redirect('dashboard')
+            return redirect('view_dashboard')
     else:
         form = UserCreationForm()
-    return render(request, 'signup.html', {'form': form})
+    return render(request, 'core/signup.html', {'form': form})
