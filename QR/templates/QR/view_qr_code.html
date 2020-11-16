@@ -1,18 +1,18 @@
 {% extends 'core/base.html' %}
 
 {% block content %}
-    <h1 class=title>View QR Code {{ qr.id }}</h1>     
-    <small>Date added: {{ qr.created_at }}</small>
-
-    <br>
+    <h1 class=title>View QR Code {{ qr.id }}</h1>
+    <small>Updated: {{ qr.change_at }}</small>
+    
+    <br></br>
     
     <!-- Should -->
     <a class="button is-success">Print - TODO make print work</a>  
     <a href="" class="button is-danger">Delete - TODO make delete work</a>
 
-    <br>    
+    <br></br>    
 
-    <img src="/{{ qr.image }}">    
+    <img src="{{ MEDIA_URL }}/{{ qr.image }}">    
     
     
 {% endblock %}
