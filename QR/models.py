@@ -19,7 +19,7 @@ class QRBlock(models.Model):
     def save(self, *args, **kwargs): 
         super(QRBlock, self).save(*args, **kwargs)
         qr_block = self.create_block()
- 
+    
     def concat_horizontal_image(self, original_image, new_image):
         h_img = Image.new('RGB', ((original_image.width + new_image.width), original_image.height))
         h_img.paste(original_image, (0,0))
