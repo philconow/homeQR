@@ -1,18 +1,41 @@
 {% extends 'core/base.html' %}
 
 {% block content %}
-<div id="app">
-    <p>
-      Last result: <b>{{ decodedContent }}</b>
-    </p>
-  
-    <p class="error">
-      {{ errorMessage }}
-    </p>
-  
-    <qrcode-stream @decode="onDecode" @init="onInit"></qrcode-stream>
-</div>
+    <h1 class="title">Scan QR Code</h1>
+    <h2 class="subtitle has-text-danger">Accept prompt for camera or you will need to enable browser settings manually.</h2>
+    
+    <div id="app">
+      <qrcode-stream @decode="onDecode">
+        <div class="decoded-content">{{ decodedContent }}</div>               
+      </qrcode-stream>
+      <div class="error">{{ errorMessage }}</div>
+    </div>
     
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-    <script src="{{ STATIC_URL }}/static/scan.js"></script>    
+    <script src="https://unpkg.com/vue-qrcode-reader/dist/VueQrcodeReader.umd.min.js"></script>
+    <script type="text/javascript">
+      Vue.use(VueQrcodeReader)
+
+      new Vue({
+        el: '#app',
+
+        data () {
+          return {
+            paused: false,
+            decodedContent: null,
+            errorMessage: ''
+          }
+        },
+
+        methods: {
+          onDecode (content) {   
+            self.decodedContent = content
+            
+            window.location = "{% url 'view_qr_code' 1234 %}".replace(/1234/, self.decodedContent.toString());            
+          },          
+        }
+      })
+    </script>
+
+    
 {% endblock %}
