@@ -10,6 +10,6 @@ urlpatterns = [
     path('about/', about, name='about'),
     path('signup/', signup, name='signup'), 
     path('logout/', LogoutView.as_view(), name='logout'),
-    path('login/', LoginView.as_view(template_name='login.html'), name='login'),
+    path('login/', LoginView.as_view(template_name='core/login.html'), name='login'),
 
 ]
