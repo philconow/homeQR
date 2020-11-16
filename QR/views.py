@@ -51,6 +51,8 @@ def view_qr_code(request, qr_id):
 
 # TODO: Fix this view
 def scan_qr_code(request):
-    return render(request, 'QR/scan_qr_code.html')
+    return render(request, 'QR/scan.html')
+
+
 
 
